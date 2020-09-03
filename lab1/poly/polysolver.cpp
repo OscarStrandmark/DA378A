@@ -6,7 +6,46 @@ int main(int argc, char** argv)
 	std::cout << "Root-finding started..." << std::endl;
 
     
-    // todo
+    bool loop = true;
+
+    while (loop)
+    {
+        float coef1;
+        float coef2;
+        float coef3;
+
+        std::cin >> coef1;
+        std::cin >> coef2;
+        std::cin >> coef3;
+
+        std::cout << "Found polynomial coeffs:" << std::endl;
+        std::cout << coef1 << std::endl;
+        std::cout << coef2 << std::endl;
+        std::cout << coef3 << std::endl;
+        std::cout << " " << std::endl;
+
+        Poly2 poly = Poly2(coef1, coef2, coef3);
+
+        int rootCount;
+        float rootA;
+        float rootB;
+
+        poly.findRoots(rootCount, rootA, rootB);
+        if (rootCount > 0)
+        {
+            if (rootCount == 1) {
+                std::cout << rootA << std::endl;
+                std::cout << std::endl;
+            }
+            if (rootCount == 2) {
+                std::cout << rootA << std::endl;
+                std::cout << rootB << std::endl;
+                std::cout << std::endl;
+            }
+        }
+
+        if (std::cin.eof()) loop = false;
+    }
 
     
 	return 0;

@@ -139,26 +139,24 @@ int main() {
 
     //Uppgift 10:
 
-    float coef1;
-    float coef2;
-    float coef3;
+    float coefA;
+    float coefB;
+    float coefC;
 
     while (1)
     {
         std::cout << "Mata in 3 tal." << std::endl;
+        //Read coeffs
+        std::cin >> coefA;
+        std::cin >> coefB;
+        std::cin >> coefC;
 
-        std::cin >> coef1;
-        std::cin >> coef2;
-        std::cin >> coef3;
-
-        Poly2 polynom = Poly2(coef1, coef2, coef3);
-
+        //Calc roots
+        Poly2 polynom = Poly2(coefA, coefB, coefC);
         int rootCount;
         float rootA;
         float rootB;
-
         polynom.findRoots(rootCount, rootA, rootB);
-
         std::cout << "Roots found: " << rootCount << std::endl;
         if (rootCount > 0)
         {
@@ -173,6 +171,7 @@ int main() {
             }
         }
 
+        //Again?
         char c;
         std::cout << "Vill du forts. skapa polynom? y/n" << std::endl;
         std::cin >> c;

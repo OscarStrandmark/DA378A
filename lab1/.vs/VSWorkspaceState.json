@@ -2,8 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\hello",
-    "\\makefile_hello"
+    "\\makefile_hello",
+    "\\makefile_project",
+    "\\makefile_project\\bin",
+    "\\makefile_project\\include",
+    "\\makefile_project\\src",
+    "\\poly"
   ],
-  "SelectedNode": "\\hello\\hello.cpp",
+  "SelectedNode": "\\poly",
   "PreviewInSolutionExplorer": false
 }
