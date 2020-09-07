@@ -33,15 +33,23 @@ int main(int argc, char** argv)
         poly.findRoots(rootCount, rootA, rootB);
         if (rootCount > 0)
         {
+            std::cout << "Roots found:" << std::endl;
             if (rootCount == 1) {
                 std::cout << rootA << std::endl;
-                std::cout << std::endl;
+                std::cout << "Eval: " << std::endl;
+                std::cout << poly.eval(rootA) << std::endl;
             }
             if (rootCount == 2) {
                 std::cout << rootA << std::endl;
                 std::cout << rootB << std::endl;
-                std::cout << std::endl;
+                std::cout << "Eval: " << std::endl;
+                std::cout << poly.eval(rootA) << std::endl;
+                std::cout << poly.eval(rootB) << std::endl;
             }
+        }
+        else
+        {
+            std::cout << "No roots found." << std::endl;
         }
 
         if (std::cin.eof()) loop = false;

@@ -1,0 +1,38 @@
+Root-finding started...
+Found polynomial coeffs:
+1
+2
+1
+ 
+Roots found:
+-1
+Eval: 
+0
+Found polynomial coeffs:
+2
+-1
+-1
+ 
+Roots found:
+1
+-0.5
+Eval: 
+0
+0
+Found polynomial coeffs:
+1
+1
+1
+ 
+No roots found.
+Found polynomial coeffs:
+1
+2
+-2
+ 
+Roots found:
+0.732051
+-2.73205
+Eval: 
+-1.19209e-07
+4.76837e-07

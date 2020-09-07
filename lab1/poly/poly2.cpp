@@ -66,10 +66,12 @@ void Poly2::findRoots(int &rootCount, float &rootA, float &rootB)
 
 }
 
+/*
+
+    ---> FICK KOMMENTERA BORT HELA MAIN FÖR ATT KUNNA KOMPILERA POLYSOLVER <--
+
 
 int main() {
-
-    /*
     
     Denna kod tillhör uppgift 9 & 8
 
@@ -135,7 +137,7 @@ int main() {
             std::cout << polyC.eval(rootB) << std::endl;
         }
     }
-    */
+    
 
     //Uppgift 10:
 
@@ -178,11 +180,7 @@ int main() {
         if (c != 'y') {
             break;
         }
-    }
-
-   
-
-   
+    } 
 }
-
+*/
 
