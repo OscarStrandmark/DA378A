@@ -1,0 +1,5 @@
+﻿  Lab2.cpp
+C:\dev\git\DA378A\lab2\Lab2\Lab2.cpp(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\dev\git\DA378A\lab2\Lab2\Lab2.cpp(107,23): warning C4018: '<': signed/unsigned mismatch
+C:\dev\git\DA378A\lab2\Lab2\Lab2.cpp(122,31): warning C4018: '<': signed/unsigned mismatch
+  Lab2.vcxproj -> C:\dev\git\DA378A\lab2\Lab2\Debug\Lab2.exe

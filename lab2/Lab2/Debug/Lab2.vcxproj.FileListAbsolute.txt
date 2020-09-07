@@ -1,0 +1,2 @@
+C:\dev\git\DA378A\lab2\Lab2\Debug\Lab2.exe
+C:\dev\git\DA378A\lab2\Lab2\Debug\Lab2.pdb
