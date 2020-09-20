@@ -18,7 +18,13 @@
     <ClCompile Include="lab3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PersonRegTest.cpp">
+    <ClCompile Include="Person.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PersonReg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PersonMedTel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -26,5 +32,16 @@
     <Text Include="PersonExempel.txt">
       <Filter>Resource Files</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Person.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PersonReg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PersonMedTel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

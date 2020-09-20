@@ -1,20 +1,88 @@
-// lab3.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
+#include "PersonReg.h"
+#include "PersonMedTel.h"
+#include <fstream>
 #include <iostream>
+
+bool readReg(PersonReg& reg, std::string filename);
+
+bool readReg(PersonReg& reg, std::string filename)
+{
+	std::string line;
+	std::ifstream myfile(filename);
+
+	if (myfile.is_open())
+	{
+		while (getline(myfile, line))
+		{
+			while (line.length() == 0 && getline(myfile, line));
+			std::string name(line);
+			std::string address;
+			getline(myfile, address);
+			reg.AddPerson(&Person(name, address));
+		}
+		myfile.close();
+		return true;
+	}
+	else
+	{
+		std::cout << "Unable to open file";
+		return false;
+	}
+}
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	std::locale::global(std::locale("swedish"));
+
+	//Create register
+	PersonReg* reg = new PersonReg(16);
+
+	//Add person to register
+	Person* pers = new Person("Sven Svensson", "Svenssongatan 4A, 21619 MALMÖ");
+	reg->AddPerson(pers);
+
+	//Read from file
+	std::string filename = "C:/dev/git/DA378A/lab3/PersonExempel.txt";
+	readReg(*reg, filename);
+
+	//Print register
+	std::cout << "Register:" << std::endl << "-----" << std::endl;
+	reg->PrintRegister();
+
+	//Remove person from register
+	std::cout << std::endl << "Person removed from register." << std::endl;
+	reg->RemovePerson(pers);
+
+	//Print register
+	std::cout << std::endl << "Register:" << std::endl << "-----" << std::endl;
+	reg->PrintRegister();
+
+	//Search name
+	std::string name = "Nicklas Mattsson";
+	std::cout << std::endl << "Search by name: " << name << std::endl << "-----" << std::endl;
+	Person* p1 = reg->SearchPersonName(name);
+
+	if (p1) p1->Print(); //Print if not nullptr. 
+
+	//Search by keyword
+	std::string keyword = "träsk";
+	std::cout << std::endl << "Search by keyword: " << keyword << std::endl << "-----" << std::endl;
+	Person* p2 = reg->SearchKeyword(keyword,nullptr);
+
+	if (p2) p2->Print(); //Print if not nullptr. 
+
+	//Print with telephone nbr
+	Person* telPerson = new PersonMedTel("Samuel Samuelsson", "Samuelsgatan 24", "1234567890");
+	std::cout << std::endl << "Print with telephone number: "  << std::endl << "-----" << std::endl;
+	telPerson->Print();
+
+	//Delete shit, 
+	delete telPerson;
+	delete pers;
+	delete reg;
+
+	_CrtDumpMemoryLeaks();
+
+	return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
