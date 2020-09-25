@@ -3,8 +3,6 @@
 #include <fstream>
 #include <iostream>
 
-bool readReg(PersonReg& reg, std::string filename);
-
 bool readReg(PersonReg& reg, std::string filename)
 {
 	std::string line;
@@ -32,7 +30,6 @@ bool readReg(PersonReg& reg, std::string filename)
 
 int main()
 {
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	std::locale::global(std::locale("swedish"));
 
 	//Create register
@@ -43,7 +40,7 @@ int main()
 	reg->AddPerson(pers);
 
 	//Read from file
-	std::string filename = "C:/dev/git/DA378A/lab3/PersonExempel.txt";
+	std::string filename = "W:/git/DA378A/lab3/lab3/PersonExempel.txt"; //ATTN CHANGE THIS IF YOU NEED IT 
 	readReg(*reg, filename);
 
 	//Print register
@@ -77,12 +74,13 @@ int main()
 	std::cout << std::endl << "Print with telephone number: "  << std::endl << "-----" << std::endl;
 	telPerson->Print();
 
+	std::cout << std::endl << "Enter to close";
+	std::getchar();
+
 	//Delete shit, 
 	delete telPerson;
 	delete pers;
 	delete reg;
-
-	_CrtDumpMemoryLeaks();
 
 	return 0;
 }
