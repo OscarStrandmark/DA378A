@@ -31,3 +31,8 @@ void Person::Print()
 	//Print name and address. 
 	std::cout << name << " " << address << std::endl;
 }
+
+bool Person::operator<(const Person& that)
+{
+	return this->name > that.name;
+}

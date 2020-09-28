@@ -1,7 +1,5 @@
 #include "Person.h"
 
-
-
 class PersonReg
 {
 private:
@@ -17,4 +15,6 @@ public:
 	Person* SearchKeyword(std::string keyword, Person* from);
 	void PrintRegister();
 	~PersonReg();
+	Person* begin();
+	Person* end();
 };

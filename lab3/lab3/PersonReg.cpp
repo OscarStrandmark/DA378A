@@ -115,3 +115,13 @@ void PersonReg::PrintRegister()
 		ptr->Print();
 	}
 }
+
+Person* PersonReg::begin()
+{
+	return personer;
+}
+
+Person* PersonReg::end()
+{
+	return personer + currentSize;
+}

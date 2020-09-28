@@ -14,4 +14,5 @@ public:
 	std::string GetName();
 	std::string GetAddress();
 	virtual void Print();
+	bool operator<(const Person& that);
 };
