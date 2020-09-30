@@ -1,2 +1,4 @@
 C:\dev\git\DA378A\lab3\lab3\Debug\lab3.exe
 C:\dev\git\DA378A\lab3\lab3\Debug\lab3.pdb
+W:\git\DA378A\lab3\lab3\Debug\lab3.exe
+W:\git\DA378A\lab3\lab3\Debug\lab3.pdb

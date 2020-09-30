@@ -2,6 +2,14 @@
 #include "PersonMedTel.h"
 #include <fstream>
 #include <iostream>
+#ifdef _DEBUG
+#ifndef DBG_NEW
+#include <stdlib.h>
+#include <crtdbg.h>
+#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+#define new DBG_NEW
+#endif
+#endif  // _DEBUG
 
 bool readReg(PersonReg& reg, std::string filename)
 {
@@ -30,6 +38,9 @@ bool readReg(PersonReg& reg, std::string filename)
 
 int main()
 {
+#ifdef DBG_NEW
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+#endif
 	std::locale::global(std::locale("swedish"));
 
 	//Create register
@@ -70,9 +81,14 @@ int main()
 	if (p2) p2->Print(); //Print if not nullptr. 
 
 	//Print with telephone nbr
-	Person* telPerson = new PersonMedTel("Samuel Samuelsson", "Samuelsgatan 24", "1234567890");
+	Person* telPerson = new PersonMedTel("Samuel Samuelsson", "Samuelsgatan 24 21612 MALMÖ", "1234567890");
 	std::cout << std::endl << "Print with telephone number: "  << std::endl << "-----" << std::endl;
 	telPerson->Print();
+
+	//Print with telephone nbr while in register
+	reg->AddPerson(telPerson);
+	std::cout << std::endl << "Print register with person with telephone number: " << std::endl << "-----" << std::endl;
+	reg->PrintRegister();
 
 	std::cout << std::endl << "Enter to close";
 	std::getchar();
@@ -82,5 +98,6 @@ int main()
 	delete pers;
 	delete reg;
 
+	_CrtDumpMemoryLeaks();
 	return 0;
 }
