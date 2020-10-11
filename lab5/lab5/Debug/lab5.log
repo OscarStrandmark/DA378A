@@ -1,0 +1,5 @@
+﻿  lab5.cpp
+  String.cpp
+W:\git\DA378A\lab5\lab5\String.cpp(124,20): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  lab5.vcxproj -> W:\git\DA378A\lab5\lab5\Debug\lab5.exe
