@@ -61,9 +61,12 @@ void TestFörGodkäntString() {
     String str0;	AssertStrEqual(str0, "");
 
     //-	String(Sträng sträng)
-    String s1("foo"); assert(s1 == "foo");
-    String str(s1); assert(str == "foo");
-    String s3("bar");  assert(s3 == "bar");
+    String s1("foo"); 
+    assert(s1 == "foo");
+    String str(s1); 
+    assert(str == "foo");
+    String s3("bar");  
+    assert(s3 == "bar");
 
     //-	~String() Kom ihåg destruktorn!
     delete new String("hej");
@@ -75,8 +78,10 @@ void TestFörGodkäntString() {
     
     //Ej samma buffert
     str = "hej"; s3 = str;
-    str[0] = 'x'; assert(s3[0] == 'h');
-    s3[1] = 'y'; assert(str[1] == 'e');
+    str[0] = 'x';
+    assert(s3[0] == 'h');
+    s3[1] = 'y'; 
+    assert(str[1] == 'e');
 
 
     String str1("foo"), str2("bar"), str3("hej");
@@ -85,10 +90,10 @@ void TestFörGodkäntString() {
     assert(str1 == str);
 
     //No extra realloc
-    AssertStrEqual(str1, "foo");
-    auto xxx = str1.data();
-    str1 = String("huj");
-    assert(xxx == str1.data());
+    AssertStrEqual(str1, "foo"); //str1 = foo
+    auto xxx = str1.data(); //xxx = foo 
+    str1 = String("huj"); //str1 = huj
+    assert(xxx == str1.data()); //xxx = huj, str1 = huj ?????????????
 
     //-	operator==
     //testas överallt!
@@ -120,8 +125,8 @@ void TestFörGodkäntString() {
     //-	size(), capacity() and reloccation test;
     TestPushBackReallocation();
 
-    cout << String("hej\n");
-    cout << "Om det står hej på föregående rad så är TestFörGodkänt klar\n";
+    std::cout << String("hej\n");
+    std::cout << "Om det står hej på föregående rad så är TestFörGodkänt klar\n";
 
 }
 
@@ -225,13 +230,13 @@ int main() {
     locale::global(locale("swedish"));
     //TestUnsigned();
     TestFörGodkäntString();
-    cout << "G test klart\n";
+    std::cout << "G test klart\n";
 #ifdef VG
     TestFörVälGodkäntString();
     cout << "VG test klart\n";
 #endif
     new int;
-    cout << "det finns en minnesläcka i main, avsiktligt!\n så ni kan se att er minnesläckstest fungerar\n";
+    std::cout << "det finns en minnesläcka i main, avsiktligt!\n så ni kan se att er minnesläckstest fungerar\n";
     cin.get();
 }
 

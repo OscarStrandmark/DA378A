@@ -1,4 +1,9 @@
 #include "String.h"
+#include <string.h>
+
+char* str = nullptr;
+int cap = 1;
+int siz = 0;
 
 /*
 ##########################################################
@@ -28,8 +33,8 @@ String::String(const String& rhs)
 
 String::String(const char* cstr)
 {
-	cap = (int)strlen(cstr); //Get length of arg char*
-	siz = cap;
+	cap = strlen(cstr); //Get length of arg char*
+	siz = 0;
 	str = new char[cap]; //Set that length as the capacity of this
 
 	int i = 0;
@@ -60,7 +65,7 @@ size_t String::capacity() const
 void String::push_back(char c)
 {
 	//Before appending, check if there is enough memory. If not, double the size. 
-	if ((int)size() == 0) AllocateNewMemory(1);
+	if (size() == 0) AllocateNewMemory(1);
 	else if (siz >= (int)capacity()) AllocateNewMemory(cap * 2); 
 
 	str[siz++] = c;
@@ -69,7 +74,7 @@ void String::push_back(char c)
 
 const char* String::data() const
 {
-	return nullptr;
+	return str;
 }
 
 
@@ -82,19 +87,32 @@ const char* String::data() const
 
 String& String::operator = (const String& rhs)
 {
-	if (str) delete[] str; //If it exists, delete
-
-	//Copy over size, capacity and string length.
-	siz = rhs.size();
-	cap = rhs.capacity();
-	str = new char[cap];
-	
-	//copy over char values
-	for (int i = 0; i < siz; i++)
+	if (&rhs != this) //do not run code if attempting to declare to itself. 
 	{
-		str[i] = rhs[i];
-	}
+		if (rhs.size() == size())
+		{
+			//copy over char values
+			for (int i = 0; i < siz; i++)
+			{
+				str[i] = rhs[i];
+			}
+		}
+		else
+		{
+			if (str) delete[] str; //If it exists, delete
 
+						//Copy over size, capacity and string length.
+			siz = rhs.size();
+			cap = rhs.capacity();
+			str = new char[cap];
+
+			//copy over char values
+			for (int i = 0; i < siz; i++)
+			{
+				str[i] = rhs[i];
+			}
+		}
+	}
 	return *this; //Deref to return yourself.
 }
 
@@ -110,7 +128,6 @@ const char& String::operator[](size_t i) const
 
 bool operator==(const String& lhs, const String& rhs)
 {
-
 	return std::equal(lhs.str, lhs.str + lhs.size(), rhs.str);
 }
 
@@ -142,6 +159,26 @@ void String::Invariant()
 void String::AllocateNewMemory(int size)
 {
 	cap = size;
+
+	//Allocate the new memory
+	char* temp = new char[cap];
+
+	//Copy chars to temp storage
+	for (int i = 0; i < siz; i++)
+	{
+		temp[i] = str[i];
+	}
+	
+	//Delete if it exists
+	if (str) delete[] str;
+
+	//Allocate new memory
+	str = new char[cap];
+
+	for (int i = 0; i < siz; i++)
+	{
+		str[i] = temp[i];
+	}
+
+	delete[] temp;
 }
-
-
