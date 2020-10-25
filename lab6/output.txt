@@ -1,0 +1,16 @@
+** Print type set to decimal. **
+2
+12
+18
+4
+4
+32
+** Print type set to hexadecimal. **
+0x20
+** Print type set to binary. **
+0000000000100000
+19: Syntax Error: Unexpected token
+0000000000011001
+** Print type set to decimal. **
+4
+25: Syntax error: expression was not a number or a variable

@@ -1,0 +1,64 @@
+﻿>>>>>THESE ARE JUST MY NOTES WHILE DOING THE ASSIGNMENT, DONT TAKE ANYTHING IN HERE AS FACT<<<<<
+>>>>>WHAT YOU ARE READING ARE JUST A SNAPSHOT OF MY THOUGHTS AT ONE MOMENT IN TIME         <<<<<
+
+Need to remember if hexadecimal, decimal or binary. 
+Statements separated by newline, read from file by line. 
+Then seperate into tokens with ' ', did this with regex.
+
+can almost copy paste code from F11 ... why
+
+find a way to get the i/o-manipulators to remove the disgusting ass extra code in the print-thingies
+
+see racc.jpg for a cool dude
+
+REQUIREMENTS:
+functionality
+
+- The program reads all code from a separate source file.
+	- Done
+- The program parses and executes code correctly according to the C@ grammar,including but not limited to the provided example code. Add your own code (orcode suggested by a teacher) and test more examples as well.
+	- Done
+- Output is sent to an ​std::ostream​, such as ​cout​ (standard output) or an ofstream​ (file stream), See the interpreter constructor above.
+	- Done
+- Blocks defined by regular expressions (​Int​ and ​Variable​) should be matched properly to the provided pattern. ​Int​-tokens should be matched before being castto C++-integers.
+	- Done, if I interpreted this correctly.
+- Invalid syntax, e.g. ​print 1 + – 2​, should cause an error with an error message stating something about what went wrong.
+	- Done
+
+design
+
+- The interpreter/parser should be well structured and implemented with thegrammar in mind.
+	- Done. At least I think so.
+- The interpreter/parser should be implemented in well formed C++.
+	- I sure hope so. 
+
+FUTURE WORK:
+
+I have already done this type of assignment in another course and I'm very lazy so instead of doin the extra parts I'll just talk about them here.
+
+Not allowing reserved names:
+	Very easy, just have a collection of reserved words and do a != or something whenever a variable is created to make sure the use of those words is not allowed.
+
+Unary operators:
+	Could pretty easily do a check for '++' and '--' in parse_SumExp, would be two extra else-if-statements. Four extra for both post- and prefixes.
+
+logical-comparison expressions:
+	hm, code would probably look very similar. I think the current structure/grammar would work pretty well with this structure. Would just need to determine where in the prioritization list to put the operators.
+
+real programming stuff:
+	This isn't really that hard on a simple level once you get your head wrapped around it. Build the AST, then traverse the tree. While traversing the tree you either pop, push or do stuff on a stack
+	depending on what you traverse. Let's say you have the statement 2 + 3. Making a AST from this, the '+' token would be the parent of both the numbers. Now when traversing push, pop or do stuff on the stack.
+	Example for the 2 + 3:
+
+		+
+	   / \
+	  2   3
+
+	1. Enter +: Do nothing
+	2. Enter 2: Do nothing
+	3. Exit  2: Push 2 onto the stack.		Stack:| 2
+	4. Enter 3: Do nothing
+	5. Exit  3: Push 3 onto the stack.		Stack:| 2 3
+	6. Exit  +: Call addition on the stack. Stack| 5
+
+	Then when you build a bigger tree it can get pretty messy but if you make sure to build your tree correctly it's not that bad.
