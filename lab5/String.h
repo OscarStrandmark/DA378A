@@ -7,9 +7,9 @@ class String
 {
 private:
 	//Vars
-	char* str = nullptr;
-	int capacity = 1;
-	int size = 0;
+	char* str;
+	int cap;
+	int siz;
 
 	//Private Funcs
 	void Invariant();
