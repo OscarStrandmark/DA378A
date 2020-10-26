@@ -22,11 +22,20 @@ String::~String()
 
 String::String()
 {
-	String("");
+	//Changed accordingly to comment on turnin that nullptr is better than initializing an empty string as it still reserves memory if its empty.
+	//String(""); 
+	str = nullptr;
 }
 
 String::String(const String& rhs)
 {
+	/*
+	* Comment from turnin:
+	* Du kan inte anropa operator= med oinitierat minne på vänstersidan, där kan det stå vad som helst.
+	* 
+	* How is *this unallocated memory? Would not *this point to the allocated memory of lhs? Seems weird to have access to memory through *this if it was not allocated. 
+	*/
+	AllocateNewMemory(rhs.size()); 
 	*this = rhs; //rhs should already exist on the Heap
 	Invariant();
 }
@@ -87,6 +96,12 @@ const char* String::data() const
 
 String& String::operator = (const String& rhs)
 {
+	/*
+	* Comment from turn in:
+	* Logiken i operator= är inte rätt! Du behöver allokera minne om vänstersidans capacitet är mindre än högersidans size, annars inte.
+	* 
+	* Is memory not allocated when the new char[cap] is ran? Do I really need to call AllocateMemory() here?
+	*/
 	if (&rhs != this) //do not run code if attempting to declare to itself. 
 	{
 		if (rhs.size() == size())
@@ -101,7 +116,7 @@ String& String::operator = (const String& rhs)
 		{
 			if (str) delete[] str; //If it exists, delete
 
-						//Copy over size, capacity and string length.
+			//Copy over size, capacity and string length.
 			siz = rhs.size();
 			cap = rhs.capacity();
 			str = new char[cap];
@@ -128,7 +143,20 @@ const char& String::operator[](size_t i) const
 
 bool operator==(const String& lhs, const String& rhs)
 {
-	return std::equal(lhs.str, lhs.str + lhs.size(), rhs.str);
+	if (lhs.size() == rhs.size()) //For lhs and rhs to be equal, size has to be the same.
+	{
+		for (size_t i = 0; i < lhs.size(); i++) //lhs.size == rhs.size, no unallocated memory should never be accessed. 
+		{
+			if (lhs[i] != rhs[i]) //Check if letters are not matching
+			{
+				return false; //If found not matching letters
+			}
+		}
+		return true; //If all letters matched, strings are equal. Return true
+	}
+	return false;
+	//Old code did not work with new testcode. 
+	//return std::equal(lhs.str, lhs.str + lhs.size(), rhs.str); 
 }
 
 bool operator!=(const String& lhs, const String& rhs)
