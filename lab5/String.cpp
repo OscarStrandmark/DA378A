@@ -29,14 +29,18 @@ String::String()
 
 String::String(const String& rhs)
 {
-	/*
-	* Comment from turnin:
-	* Du kan inte anropa operator= med oinitierat minne på vänstersidan, där kan det stå vad som helst.
-	* 
-	* How is *this unallocated memory? Would not *this point to the allocated memory of lhs? Seems weird to have access to memory through *this if it was not allocated. 
-	*/
-	AllocateNewMemory(rhs.size()); 
-	*this = rhs; //rhs should already exist on the Heap
+	//Changed according to comment on turnin that I should not call operator= with uninitialized memory on the left side (*this)
+	//*this = rhs;
+
+	cap = rhs.capacity();
+	siz = rhs.size();
+	str = new char[cap];
+
+	for (size_t i = 0; i < siz; i++)
+	{
+		str[i] = rhs[i];
+	}
+
 	Invariant();
 }
 
@@ -112,7 +116,7 @@ String& String::operator = (const String& rhs)
 				str[i] = rhs[i];
 			}
 		}
-		else
+		else //Bryt ut i 2 if-satser, en för lhs mindre & en för lhs större
 		{
 			if (str) delete[] str; //If it exists, delete
 
@@ -155,13 +159,14 @@ bool operator==(const String& lhs, const String& rhs)
 		return true; //If all letters matched, strings are equal. Return true
 	}
 	return false;
+
 	//Old code did not work with new testcode. 
 	//return std::equal(lhs.str, lhs.str + lhs.size(), rhs.str); 
 }
 
 bool operator!=(const String& lhs, const String& rhs)
 {
-	return !(std::equal(lhs.str, lhs.str + lhs.size(), rhs.str));
+	return ! (lhs == rhs);
 }
 
 std::ostream& operator<<(std::ostream& out, const String& rhs)
