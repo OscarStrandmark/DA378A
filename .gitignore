@@ -2,3 +2,7 @@
 **/.vs
 *.zip
 *.pdf
+*.vcxproj
+*.filters
+*.user
+*.sln
