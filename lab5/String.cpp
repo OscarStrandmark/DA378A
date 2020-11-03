@@ -78,7 +78,7 @@ size_t String::capacity() const
 void String::push_back(char c)
 {
 	//Before appending, check if there is enough memory. If not, double the size. 
-	if (size() == 0) AllocateNewMemory(1);
+	if (capacity() == 0) AllocateNewMemory(1);
 	else if (siz >= (int)capacity()) AllocateNewMemory(cap * 2); 
 
 	str[siz++] = c;
@@ -116,7 +116,23 @@ String& String::operator = (const String& rhs)
 				str[i] = rhs[i];
 			}
 		}
-		else //Bryt ut i 2 if-satser, en för lhs mindre & en för lhs större
+		else 
+		if(rhs.capacity() < capacity()) //RHS smaller, just copy over
+		{
+			for (int i = 0; i < capacity()-1; i++)
+			{
+				str[i] = ' '; //Set all indexes to empty, this is in case what already exists in memory is longer than rhs. 
+			}
+
+			for (int i = 0; i < capacity(); i++)
+			{
+				str[i] = rhs[i]; //Copy over contents of rhs.
+			}
+			
+			siz = rhs.size();
+
+		}
+		else if (rhs.capacity() > capacity()) //RHS bigger, allocate new memory
 		{
 			if (str) delete[] str; //If it exists, delete
 
