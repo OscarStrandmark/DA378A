@@ -25,6 +25,8 @@ String::String()
 	//Changed accordingly to comment on turnin that nullptr is better than initializing an empty string as it still reserves memory if its empty.
 	//String(""); 
 	str = nullptr;
+	siz = 0;
+	cap = 0;
 }
 
 String::String(const String& rhs)
@@ -47,6 +49,7 @@ String::String(const String& rhs)
 String::String(const char* cstr)
 {
 	cap = strlen(cstr); //Get length of arg char*
+	std::cout << cap << std::endl;
 	siz = 0;
 	str = new char[cap]; //Set that length as the capacity of this
 
@@ -111,7 +114,7 @@ String& String::operator = (const String& rhs)
 	{
 		if (rhs.size() > capacity())
 		{
-			if (str) delete[] str; //If it exists, delete
+			delete[] str; //If it exists, delete
 
 			//Copy over size, capacity and string length.
 			siz = rhs.size();
@@ -124,12 +127,8 @@ String& String::operator = (const String& rhs)
 				str[i] = rhs[i];
 			}
 		}
-		else //rhs.size() == capacity() || rhs.size() < capacity(), handled the same
+		else if (rhs.size() == capacity() || rhs.size() < capacity()) //handled the same
 		{	
-			for (int i = 0; i < capacity() - 1; i++)
-			{
-				str[i] = ' '; //Set all indexes to empty, this is in case what already exists in memory is longer than rhs. 
-			}
 
 			for (int i = 0; i < capacity(); i++)
 			{
