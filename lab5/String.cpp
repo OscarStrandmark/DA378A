@@ -101,38 +101,15 @@ const char* String::data() const
 String& String::operator = (const String& rhs)
 {
 	/*
-	* Comment from turn in:
-	* Logiken i operator= är inte rätt! Du behöver allokera minne om vänstersidans capacitet är mindre än högersidans size, annars inte.
-	* 
-	* Is memory not allocated when the new char[cap] is ran? Do I really need to call AllocateMemory() here?
+	* Three difference scenarios can happen here that we care about:
+	* rhs.size > capacity
+	* rhs.size = capacity
+	* rhs.size < capacity
+	* Two of these are handled the same way (= and >, since in both scenarios the allocated memory has space for the rhs content.)
 	*/
 	if (&rhs != this) //do not run code if attempting to declare to itself. 
 	{
-		if (rhs.size() == size())
-		{
-			//copy over char values
-			for (int i = 0; i < siz; i++)
-			{
-				str[i] = rhs[i];
-			}
-		}
-		else 
-		if(rhs.capacity() < capacity()) //RHS smaller, just copy over
-		{
-			for (int i = 0; i < capacity()-1; i++)
-			{
-				str[i] = ' '; //Set all indexes to empty, this is in case what already exists in memory is longer than rhs. 
-			}
-
-			for (int i = 0; i < capacity(); i++)
-			{
-				str[i] = rhs[i]; //Copy over contents of rhs.
-			}
-			
-			siz = rhs.size();
-
-		}
-		else if (rhs.capacity() > capacity()) //RHS bigger, allocate new memory
+		if (rhs.size() > capacity())
 		{
 			if (str) delete[] str; //If it exists, delete
 
@@ -146,6 +123,20 @@ String& String::operator = (const String& rhs)
 			{
 				str[i] = rhs[i];
 			}
+		}
+		else //rhs.size() == capacity() || rhs.size() < capacity(), handled the same
+		{	
+			for (int i = 0; i < capacity() - 1; i++)
+			{
+				str[i] = ' '; //Set all indexes to empty, this is in case what already exists in memory is longer than rhs. 
+			}
+
+			for (int i = 0; i < capacity(); i++)
+			{
+				str[i] = rhs[i]; //Copy over contents of rhs.
+			}
+
+			siz = rhs.size();
 		}
 	}
 	return *this; //Deref to return yourself.
