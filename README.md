@@ -1,2 +1,2 @@
 # DA378A
-Programkod tillhörande kursen i C++
+Code for assignments for the C++ course at Malmö University.
